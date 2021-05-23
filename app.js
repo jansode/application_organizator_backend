@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 
 const usersRouter = require('./controllers/users')
 const applicationsRouter = require('./controllers/applications')
@@ -17,9 +18,9 @@ connection.once('open', () => {
     console.log('mongodb connection open')
 })
 
-app.use(express.static('build'))
 app.use(express.json())
 app.use(cors())
+app.use('/', express.static('build'))
 app.use('/api/users', usersRouter)
 app.use('/api/applications', applicationsRouter)
 app.use('/api/login', loginRouter)

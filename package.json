@@ -4,6 +4,7 @@
   "description": "",
   "main": "api.js",
   "scripts": {
+    "start": "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,5 +18,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.9",
     "mongoose-unique-validator": "^2.0.3"
+  },
+
+  "engines": {
+    "node" : "v15.10.0"
   }
 }

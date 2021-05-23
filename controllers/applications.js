@@ -6,10 +6,9 @@ const Utils = require('./utils')
 
 applicationsRouter.post('/', async(request, response) => {
 
-    const token = Utils.getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    if(!token || !decodedToken.id){
+    const decodedToken = Utils.getDecodedToken(request)
+    if(decodedToken == null)
+    {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
 
@@ -28,12 +27,10 @@ applicationsRouter.post('/', async(request, response) => {
 })
 
 applicationsRouter.get('/', async(request, response) => {
-
     
-    const token = Utils.getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    if(!token || !decodedToken.id){
+    const decodedToken = Utils.getDecodedToken(request)
+    if(decodedToken == null)
+    {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
 
@@ -43,10 +40,9 @@ applicationsRouter.get('/', async(request, response) => {
 })
 
 applicationsRouter.get('/:applicationId', async(request, response) => {
-    const token = Utils.getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    if(!token || !decodedToken.id){
+    const decodedToken = Utils.getDecodedToken(request)
+    if(decodedToken == null)
+    {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
 
@@ -55,22 +51,15 @@ applicationsRouter.get('/:applicationId', async(request, response) => {
 })
 
 applicationsRouter.delete('/:applicationId', async(request, response) => {
-
-
-    const token = Utils.getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    if(!token || !decodedToken.id){
+    
+    const decodedToken = getDecodedToken(request)
+    if(decodedToken == null)
+    {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
 
     await Application.deleteOne({ _id : request.params.applicationId })
     return response.status(200).json({ message: "successful" })
-})
-
-applicationsRouter.get('/:applicationId', async(request, response) => {
-    const application = await Application.findOne({ _id : request.params.applicationId })
-    response.json(application.toJSON())
 })
 
 module.exports = applicationsRouter

@@ -21,6 +21,13 @@ usersRouter.post('/', async(request, response) => {
 })
 
 usersRouter.get('/', async(request, response) => {
+
+    const decodedToken = Utils.getDecodedToken(request)
+    if(decodedToken == null)
+    {
+        return response.status(401).json({ error: 'Token missing or invalid' }) 
+    }
+
     const users = await User
         .find({}).populate('application')
 
@@ -29,10 +36,9 @@ usersRouter.get('/', async(request, response) => {
 
 usersRouter.get('/from_token', async(request, response) => {
 
-    const token = Utils.getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    if(!token || !decodedToken.id){
+    const decodedToken = Utils.getDecodedToken(request)
+    if(decodedToken == null)
+    {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
 

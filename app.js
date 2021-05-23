@@ -17,6 +17,7 @@ connection.once('open', () => {
     console.log('mongodb connection open')
 })
 
+app.use(express.static('build'))
 app.use(express.json())
 app.use(cors())
 app.use('/api/users', usersRouter)

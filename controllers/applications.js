@@ -13,9 +13,6 @@ applicationsRouter.get('/', async(request, response) => {
     }
 
     const applications = await Application.find({ user : decodedToken.id })
-
-    console.log(applications)
-
     response.json(applications.map(a => a.toJSON()))
 })
 
@@ -49,10 +46,19 @@ applicationsRouter.post('/', async(request, response) => {
     })
 
     const savedApplication = await application.save()
-
-    console.log(savedApplication)
-
     response.json(savedApplication)
+})
+
+applicationsRouter.put('/:applicationId', async(request, response) => {
+
+    const decodedToken = Utils.getDecodedToken(request)
+    if(decodedToken == null)
+    {
+        return response.status(401).json({ error: 'Token missing or invalid' }) 
+    }
+    const result = await Application.findByIdAndUpdate(request.params.applicationId, request.body, {'new' : true})
+
+    response.json(result.data)
 })
 
 applicationsRouter.delete('/:applicationId', async(request, response) => {

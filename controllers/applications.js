@@ -57,7 +57,7 @@ applicationsRouter.post('/', async(request, response) => {
 
 applicationsRouter.delete('/:applicationId', async(request, response) => {
     
-    const decodedToken = getDecodedToken(request)
+    const decodedToken = Utils.getDecodedToken(request)
     if(decodedToken == null)
     {
         return response.status(401).json({ error: 'Token missing or invalid' }) 

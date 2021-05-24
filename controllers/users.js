@@ -5,21 +5,6 @@ const User = require('../models/user')
 const Application = require('../models/application')
 const Utils = require('./utils')
 
-usersRouter.post('/', async(request, response) => {
-
-    const saltRounds = 10
-    const hash = await bcrypt.hash(request.body.password, saltRounds)
-
-    const user = new User({
-        username: request.body.username,
-        passwordHash: hash,
-        applications: [] 
-    })
-
-    const savedUser = await user.save()
-    response.json(savedUser)
-})
-
 usersRouter.get('/', async(request, response) => {
 
     const decodedToken = Utils.getDecodedToken(request)
@@ -45,5 +30,21 @@ usersRouter.get('/from_token', async(request, response) => {
     const user = await User.findOne({ _id : decodedToken.id})
     response.json(user)
 })
+
+usersRouter.post('/', async(request, response) => {
+
+    const saltRounds = 10
+    const hash = await bcrypt.hash(request.body.password, saltRounds)
+
+    const user = new User({
+        username: request.body.username,
+        passwordHash: hash,
+        applications: [] 
+    })
+
+    const savedUser = await user.save()
+    response.json(savedUser)
+})
+
 
 module.exports = usersRouter

@@ -14,6 +14,8 @@ applicationsRouter.get('/', async(request, response) => {
 
     const applications = await Application.find({ user : decodedToken.id })
 
+    console.log(applications)
+
     response.json(applications.map(a => a.toJSON()))
 })
 
@@ -47,6 +49,9 @@ applicationsRouter.post('/', async(request, response) => {
     })
 
     const savedApplication = await application.save()
+
+    console.log(savedApplication)
+
     response.json(savedApplication)
 })
 

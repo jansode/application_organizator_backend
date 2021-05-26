@@ -8,15 +8,32 @@ const usersRouter = require('./controllers/users')
 const applicationsRouter = require('./controllers/applications')
 const loginRouter = require('./controllers/login')
 
-const MONGO_DB_URI = 'mongodb+srv://jsoderbe:test@cluster0.d6w5m.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+require('dotenv').config()
 
-mongoose.connect(MONGO_DB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+const db_user = process.env.DB_USER
+const db_pass = process.env.DB_PASS
+const db_name = process.env.DB_NAME
 
-const connection = mongoose.connection
+const MONGO_DB_URI = `mongodb+srv://${db_user}:${db_pass}@cluster0.d6w5m.mongodb.net/${db_name}?retryWrites=true&w=majority`
 
-connection.once('open', () => {
+console.log(MONGO_DB_URI)
+
+const mongoose_connect = async () => {
+
+    try {
+        await mongoose.connect(MONGO_DB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+
+    } catch(error) {
+        console.log(error)
+    }
+
+    mongoose.connection.once('open', () => {
     console.log('mongodb connection open')
-})
+    })
+
+}
+
+mongoose_connect()
 
 app.use(express.json())
 app.use(cors())

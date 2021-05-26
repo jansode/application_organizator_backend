@@ -31,6 +31,24 @@ usersRouter.get('/from_token', async(request, response) => {
     response.json(user)
 })
 
+usersRouter.get('/exists', async(request, response) => {
+
+    const user = request.body.username
+    if(user === ''){
+        return response.status(400).json({ error: 'No username provided.' }) 
+    }
+
+    const found = await User.findOne({ username: user })
+
+    let result = {user_exists : true}
+    if(!found)
+    {
+        result.user_exists = false
+    }
+
+    response.json(result)
+})
+
 usersRouter.post('/', async(request, response) => {
 
     const saltRounds = 10

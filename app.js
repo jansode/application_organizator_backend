@@ -16,8 +16,6 @@ const db_name = process.env.DB_NAME
 
 const MONGO_DB_URI = `mongodb+srv://${db_user}:${db_pass}@cluster0.d6w5m.mongodb.net/${db_name}?retryWrites=true&w=majority`
 
-console.log(MONGO_DB_URI)
-
 const mongoose_connect = async () => {
 
     try {

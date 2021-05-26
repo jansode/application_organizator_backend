@@ -4,6 +4,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 const Application = require('../models/application')
 const Utils = require('./utils')
+const mongoose = require('mongoose')
 
 usersRouter.get('/', async(request, response) => {
 
@@ -31,22 +32,34 @@ usersRouter.get('/from_token', async(request, response) => {
     response.json(user)
 })
 
-usersRouter.get('/exists', async(request, response) => {
+usersRouter.get('/exists/:username', async(request, response) => {
 
-    const user = request.body.username
+    const user = request.params.username
     if(user === ''){
         return response.status(400).json({ error: 'No username provided.' }) 
     }
 
-    const found = await User.findOne({ username: user })
-
-    let result = {user_exists : true}
-    if(!found)
+    try 
     {
-        result.user_exists = false
-    }
+        const result = await User.findOne({ username: user })
 
-    response.json(result)
+
+        if(!result)
+        {
+           return response.status(200).send({user_exists : false})
+        }
+
+        return response.status(200).send({user_exists : true})
+    }
+    catch(error)
+    {
+        if(error.name === 'ValidationError')
+        {
+            return response.status(200).send({user_exists : true})
+        }
+
+        return response.status(500).send("Something went wrong.")
+    }
 })
 
 usersRouter.post('/', async(request, response) => {

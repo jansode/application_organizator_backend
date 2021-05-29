@@ -6,6 +6,7 @@ const path = require('path')
 
 const usersRouter = require('./controllers/users')
 const applicationsRouter = require('./controllers/applications')
+const appartmentsRouter = require('./controllers/appartments')
 const loginRouter = require('./controllers/login')
 
 require('dotenv').config()
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/users', usersRouter)
 app.use('/api/applications', applicationsRouter)
+app.use('/api/appartments', appartmentsRouter)
 app.use('/api/login', loginRouter)
 
 app.get('/*', (req, res) => {

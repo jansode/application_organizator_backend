@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const apprtmentSchema = new mongoose.Schema({
+const appartmentSchema = new mongoose.Schema({
     title: String,
     url: String,
     address: String,
@@ -13,7 +13,7 @@ const apprtmentSchema = new mongoose.Schema({
     }
 })
 
-applicationSchema.set('toJSON', {
+appartmentSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id

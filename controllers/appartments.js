@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const appartmentsRouter = require('express').Router()
-const Appartment = require('../models/application')
+const Appartment = require('../models/appartment')
 const User = require('../models/user')
 const Utils = require('./utils')
 
@@ -13,7 +13,7 @@ appartmentsRouter.get('/', async(request, response) => {
     }
 
     const appartments = await Appartment.find({ user : decodedToken.id })
-    response.json(applications.map(a => a.toJSON()))
+    response.json(appartments.map(a => a.toJSON()))
 })
 
 appartmentsRouter.get('/:appartmentId', async(request, response) => {

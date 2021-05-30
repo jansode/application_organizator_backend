@@ -54,8 +54,9 @@ appartmentsRouter.put('/:appartmentId', async(request, response) => {
     {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
-    const result = await Appartment.findByIdAndUpdate(request.params.apprtmentId, request.body, {'new' : true})
 
+
+    const result = await Appartment.findByIdAndUpdate(request.params.appartmentId, request.body, {'new' : true})
     response.json(result.data)
 })
 

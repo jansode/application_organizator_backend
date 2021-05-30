@@ -39,6 +39,7 @@ appartmentsRouter.post('/', async(request, response) => {
         title: request.body.title,
         url: request.body.url,
         address: request.body.address,
+        size: request.body.size,
         free_date: request.body.free_date,
         user: decodedToken.id 
     })

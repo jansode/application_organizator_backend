@@ -56,8 +56,8 @@ applicationsRouter.put('/:applicationId', async(request, response) => {
     {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
-    const result = await Application.findByIdAndUpdate(request.params.applicationId, request.body, {'new' : true})
 
+    const result = await Application.findByIdAndUpdate(request.params.applicationId, request.body, {'new' : true})
     response.json(result.data)
 })
 

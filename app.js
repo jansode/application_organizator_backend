@@ -37,6 +37,7 @@ mongoose_connect()
 app.use(express.json())
 app.use(cors())
 
+app.use('/images',express.static(__dirname+'/images'))
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/users', usersRouter)

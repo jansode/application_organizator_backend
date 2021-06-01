@@ -7,6 +7,7 @@ const appartmentSchema = new mongoose.Schema({
     rent: Number, 
     size: Number,
     free_date: Date,
+    image: String,
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

@@ -1,16 +1,29 @@
 const jwt = require('jsonwebtoken')
 const multer = require('multer')
+const fs = require('fs')
+const glob = require('glob')
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images')
     },
     filename: (req, file, callback) => {
+
+        // Remove old appartment images
+        const files = glob.sync('images/'+req.body.user+'-*') 
+        files.forEach((f) =>{
+            fs.unlinkSync(f)
+
+        })
+
+        // New appartment image
         let filetype = file.mimetype.split('/')[1]
-        callback(null, req.body.user+'-'+req.body.appartment+'.'+filetype)
+        callback(null, req.body.user+'-'+req.body.appartment+'-'+Date.now()+'.'+filetype)
     }
+
 })
-const upload = multer({storage: storage}).single('imageData')
+
+const upload = multer({storage: storage})
 
 const appartmentsRouter = require('express').Router()
 const Appartment = require('../models/appartment')
@@ -74,41 +87,12 @@ appartmentsRouter.put('/:appartmentId', async(request, response) => {
     response.json(result.data)
 })
 
-const uploadAsync = (req,res) => {
-    return new Promise((resolve,reject) =>{
-        upload(req,res, (error) => {
-            if(error !== undefined)
-            {
-                return reject(error)
-            }
-            resolve()
-        })
-    })
-}
-
-
-appartmentsRouter.post('/:appartmentId/upload_image', uploadAsync, async(request, response) => {
+appartmentsRouter.post('/:appartmentId/upload_image', upload.single('imageData'), async(request, response) => {
 
     const decodedToken = Utils.getDecodedToken(request)
     if(decodedToken == null)
     {
         return response.status(401).json({ error: 'Token missing or invalid' }) 
-    }
-
-    /*
-    if(!request.file)
-    {
-        return response.status(400).json({ error: 'Missing image file.'}) 
-    }
-    **/
-
-    try 
-    {
-        await uploadAsync(req,res)
-    }
-    catch(error)
-    {
-        return response.status(500).send({error: 'File upload failed.'})
     }
 
     const result = await Appartment.findByIdAndUpdate(request.params.appartmentId, { image : request.file.path }, {'new' : true})

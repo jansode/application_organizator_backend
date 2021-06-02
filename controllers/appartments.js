@@ -2,6 +2,11 @@ const jwt = require('jsonwebtoken')
 const multer = require('multer')
 const fs = require('fs')
 const glob = require('glob')
+const sharp = require('sharp')
+
+// Caching caused unwanted behaviour
+// when resizing images.
+const sharpCache = sharp.cache(false)
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
@@ -10,15 +15,14 @@ const storage = multer.diskStorage({
     filename: (req, file, callback) => {
 
         // Remove old appartment images
-        const files = glob.sync('images/'+req.body.user+'-*') 
+        const files = glob.sync('images/'+req.body.user+'-'+req.body.appartment+'-*') 
         files.forEach((f) =>{
             fs.unlinkSync(f)
-
         })
 
         // New appartment image
         let filetype = file.mimetype.split('/')[1]
-        callback(null, req.body.user+'-'+req.body.appartment+'-'+Date.now()+'.'+filetype)
+        callback(null, req.body.user+'-'+req.body.appartment+'.'+filetype)
     }
 
 })
@@ -95,7 +99,12 @@ appartmentsRouter.post('/:appartmentId/upload_image', upload.single('imageData')
         return response.status(401).json({ error: 'Token missing or invalid' }) 
     }
 
-    const result = await Appartment.findByIdAndUpdate(request.params.appartmentId, { image : request.file.path }, {'new' : true})
+    // Resize the uploaded file. The resized file gets a timestamp.
+    const [fileName, extension] = request.file.path.split('.')
+    const newPath = fileName +'-'+Date.now() + '.' + extension 
+    await sharp(request.file.path).resize(150).toFile(newPath)
+
+    const result = await Appartment.findByIdAndUpdate(request.params.appartmentId, { image : newPath}, {'new' : true})
     response.json(result.data)
     
 })

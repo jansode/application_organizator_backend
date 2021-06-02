@@ -4,6 +4,7 @@ const appartmentSchema = new mongoose.Schema({
     title: String,
     url: String,
     address: String,
+    rooms: String,
     rent: Number, 
     size: Number,
     free_date: Date,

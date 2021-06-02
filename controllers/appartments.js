@@ -72,6 +72,7 @@ appartmentsRouter.post('/', async(request, response) => {
         size: request.body.size,
         free_date: request.body.free_date,
         image: request.body.image,
+        rooms: request.body.rooms,
         user: decodedToken.id
     })
 

@@ -1,27 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.6436b29e.chunk.css",
-    "main.js": "/static/js/main.ab8acd1d.chunk.js",
-    "main.js.map": "/static/js/main.ab8acd1d.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.2e7c0746.js",
-    "runtime-main.js.map": "/static/js/runtime-main.2e7c0746.js.map",
+    "main.css": "/static/css/main.a4a783a4.chunk.css",
+    "main.js": "/static/js/main.e05e9778.chunk.js",
+    "main.js.map": "/static/js/main.e05e9778.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b0aca122.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b0aca122.js.map",
     "static/css/2.6d8e764a.chunk.css": "/static/css/2.6d8e764a.chunk.css",
-    "static/js/2.5ce42a9d.chunk.js": "/static/js/2.5ce42a9d.chunk.js",
-    "static/js/2.5ce42a9d.chunk.js.map": "/static/js/2.5ce42a9d.chunk.js.map",
-    "static/js/3.e9e28b0c.chunk.js": "/static/js/3.e9e28b0c.chunk.js",
-    "static/js/3.e9e28b0c.chunk.js.map": "/static/js/3.e9e28b0c.chunk.js.map",
+    "static/js/2.ac1fb1a0.chunk.js": "/static/js/2.ac1fb1a0.chunk.js",
+    "static/js/2.ac1fb1a0.chunk.js.map": "/static/js/2.ac1fb1a0.chunk.js.map",
+    "static/js/3.e81a6de5.chunk.js": "/static/js/3.e81a6de5.chunk.js",
+    "static/js/3.e81a6de5.chunk.js.map": "/static/js/3.e81a6de5.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.6d8e764a.chunk.css.map": "/static/css/2.6d8e764a.chunk.css.map",
-    "static/css/main.6436b29e.chunk.css.map": "/static/css/main.6436b29e.chunk.css.map",
-    "static/js/2.5ce42a9d.chunk.js.LICENSE.txt": "/static/js/2.5ce42a9d.chunk.js.LICENSE.txt",
+    "static/css/main.a4a783a4.chunk.css.map": "/static/css/main.a4a783a4.chunk.css.map",
+    "static/js/2.ac1fb1a0.chunk.js.LICENSE.txt": "/static/js/2.ac1fb1a0.chunk.js.LICENSE.txt",
+    "static/media/appartment.e5e9ae63.jpeg": "/static/media/appartment.e5e9ae63.jpeg",
     "static/media/mail-edited.137f48e0.jpg": "/static/media/mail-edited.137f48e0.jpg",
     "static/media/mail-sent.7424d935.jpg": "/static/media/mail-sent.7424d935.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2e7c0746.js",
+    "static/js/runtime-main.b0aca122.js",
     "static/css/2.6d8e764a.chunk.css",
-    "static/js/2.5ce42a9d.chunk.js",
-    "static/css/main.6436b29e.chunk.css",
-    "static/js/main.ab8acd1d.chunk.js"
+    "static/js/2.ac1fb1a0.chunk.js",
+    "static/css/main.a4a783a4.chunk.css",
+    "static/js/main.e05e9778.chunk.js"
   ]
 }

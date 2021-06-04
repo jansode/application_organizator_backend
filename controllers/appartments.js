@@ -103,7 +103,7 @@ appartmentsRouter.post('/:appartmentId/upload_image', upload.single('imageData')
     // Resize the uploaded file. The resized file gets a timestamp.
     const [fileName, extension] = request.file.path.split('.')
     const newPath = fileName +'-'+Date.now() + '.' + extension 
-    await sharp(request.file.path).resize(150).toFile(newPath)
+    await sharp(request.file.path).resize({width: 150, height : 150}).toFile(newPath)
 
     const result = await Appartment.findByIdAndUpdate(request.params.appartmentId, { image : newPath}, {'new' : true})
     response.json(result.data)

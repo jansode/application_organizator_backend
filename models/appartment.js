@@ -5,7 +5,7 @@ const appartmentSchema = new mongoose.Schema({
     url: String,
     address: String,
     rooms: String,
-    rent: Number, 
+    price: Number, 
     size: Number,
     free_date: Date,
     image: String,

@@ -68,6 +68,7 @@ appartmentsRouter.post('/', async(request, response) => {
     const appartment = new Appartment({
         title: request.body.title,
         url: request.body.url,
+        price: request.body.price,
         address: request.body.address,
         size: request.body.size,
         free_date: request.body.free_date,
